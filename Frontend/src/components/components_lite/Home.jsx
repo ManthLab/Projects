@@ -3,9 +3,7 @@ import Navbar from './Navbar';
 import Header from './Header';
 import Categories from './Categories';
 import LatestJobs from './LatestJobs';
-import JobCards from './JobCards';
 import Footer from './Footer';
-import PrivacyPolicy from './PrivacyPolicy';
 import useGetAllJobs from '@/hooks/useGetAllJobs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,19 +17,18 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(user?. role === "Recruiter") {
+    if(user?.role === "Recruiter") {
       navigate('/admin/companies')
     }
   },[])
   return (
     <div>
-        <Navbar></Navbar>
+        <Navbar />
         <Header />
         <Categories />
         {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {error && <p>Error: {error}</p>}
         {!loading && !error && <LatestJobs jobs={jobs} />}
-        <LatestJobs />
         <Footer />
     </div>
   );

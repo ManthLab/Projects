@@ -14,12 +14,12 @@ const Footer = () => {
           <p>
             Developed by{" "}
             <a
-              href="https://github.com/ManthanMalhar2002"
+              href="https://github.com/ManthLab"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-blue-400"
             >
-              Manthan & Malhar
+              Manthan Pawar
             </a>
           </p>
         </div>
@@ -28,6 +28,8 @@ const Footer = () => {
           <a href="/privacy-policy" className="hover:underline mr-4">
             Privacy Policy
           </a>
+        </div>
+        <div className="text-center md:text-right">
           <a href="/TermsofService" className="hover:underline">
             Terms of Service
           </a>

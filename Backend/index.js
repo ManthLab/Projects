@@ -9,6 +9,9 @@ import userRoute from "./routes/user.route.js";
 import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute  from "./routes/application.route.js";
+import path from 'path';
+import { fileURLToPath } from "url";
+
 dotenv.config({});
 const app = express();
 
@@ -36,6 +39,21 @@ app.use("/api/job", jobRoute);
 app.use("/api/application", applicationRoute);
 
 
+//------------------ Code for Deployment ----------------
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
+  });
+}
+
+
 const startServer = async () => {
     try {
         await connectDB();
@@ -47,6 +65,15 @@ const startServer = async () => {
     }
 };
 startServer();
+
+/* if (process.env.NODE_ENV === "production") {
+    const dirpath = path.resolve();
+    app.use(express.static('./Frontend/dist')); 
+    app.get('/*', (req, res) => {
+        res.sendFile(path.resolve(dirpath, './Frontend/dist', 'index.html'));
+    });
+
+} */
 
 /*app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

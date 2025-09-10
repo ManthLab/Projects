@@ -19,6 +19,16 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+   /*  pancard : {
+        type : String,
+        required : true,
+        unique : true
+    },
+    aadharcard : {
+        type : String,
+        required : true,
+        unique : true
+    }, */
     role : {
         type : String,
         enum : ["Applicant","Recruiter"],

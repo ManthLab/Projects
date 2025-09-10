@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import CompaniesTable from "./CompaniesTable";
 import { useNavigate } from "react-router-dom";
-import usegetAllCompanies from "@/hooks/usegetAllCompanies";
 import { useDispatch } from "react-redux";
-import { searchCompanyByText } from "@/redux/companyslice";
+import AdminJobsTable from "./AdminJobsTable";
+import useGetAllAdminJobs from "@/hooks/useGetAllAdminJobs";
+import { setsearchJobByText } from "@/redux/jobSlice";
 
-const Companies = () => {
+const AdminJobs = () => {
+  useGetAllAdminJobs();
+
   const navigate = useNavigate();
-  usegetAllCompanies();
+  
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(searchCompanyByText(input));
+    dispatch(setsearchJobByText(input));
   },[input])
   return (
     <div>
@@ -23,19 +25,20 @@ const Companies = () => {
         <div className="flex items-center justify-between my-5">
           <Input
             className="w-fit"
-            placeholder="Filter by Name"
+            placeholder="Company Name or Role"
             onChange={(e) => setInput(e.target.value)}
           ></Input>
-          <Button onClick={() => navigate("/admin/companies/create")}>
-            Add Company
+          <Button onClick={() => navigate("/admin/jobs/create")}>
+            Post new Job
           </Button>
         </div>
         <div>
-          <CompaniesTable />
+          <AdminJobsTable />
         </div>
       </div>
     </div>
   );
 };
 
-export default Companies;
+export default AdminJobs;
+
